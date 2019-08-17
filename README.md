@@ -1,10 +1,12 @@
 # pdfmakecustomfont
-How to add custom font server side inside pdf with pdfmake 
+### How to add server side custom font inside a pdf page with pdfmake 
 
-To run type following commands
+#### To run type following commands
 npm install
-node index.js 
+
+node index.js
 
 
 Reference:
-https://github.com/bpampuch/pdfmake/issues/1659
+[Pdf make issue](https://github.com/bpampuch/pdfmake/issues/1659)
+

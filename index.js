@@ -26,9 +26,10 @@ var generatePdf = function (docDefinition, callback) {
         };
         const printer = new pdfMakePrinter(fontDescriptors);
         const doc = printer.createPdfKitDocument(docDefinition);
-
+        const filePath = 'docs/filename.pdf'
+        ensureDirectoryExistence(filePath)
         doc.pipe(
-            fs.createWriteStream('docs/filename.pdf').on("error", (err) => {
+            fs.createWriteStream(filePath).on("error", (err) => {
                 console.error(err.message);
             })
         );
@@ -41,6 +42,14 @@ var generatePdf = function (docDefinition, callback) {
         throw (err);
     }
 };
+function ensureDirectoryExistence(filePath) {
+    var dirname = path.dirname(filePath);
+    if (fs.existsSync(dirname)) {
+      return true;
+    }
+    ensureDirectoryExistence(dirname);
+    fs.mkdirSync(dirname);
+  }
 
 generatePdf(docDefinition, (response) => {
     res.setHeader('Content-Type', 'application/pdf');
